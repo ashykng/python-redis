@@ -1,0 +1,4 @@
+redis
+Flask
+flask-swagger-ui
+gunicorn

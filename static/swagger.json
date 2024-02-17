@@ -1,0 +1,153 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Redis API"
+  },
+  "tags": [
+    { "name": "Key Value Operations", "description": "Operations related to key-value pairs" },
+    { "name": "Batch Operations", "description": "Operations for all data manipulation" }
+  ],
+  "paths": {
+    "/set/{key}/{value}": {
+      "put": {
+        "summary": "Set a key-value pair in Redis",
+        "tags": ["Key Value Operations"],
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "value",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "expire",
+            "in": "query",
+            "required": false,
+            "type": "int"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Set successful"
+          },
+          "400": {
+            "description": "Error"
+          }
+        }
+      }
+    },
+    "/get/{key}": {
+      "get": {
+        "summary": "Get the value of a key from Redis",
+        "tags": ["Key Value Operations"],
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Error"
+          }
+        }
+      }
+    },
+    "/get/ttl/{key}": {
+      "get": {
+        "summary": "Get the ttl of a key from Redis",
+        "tags": ["Key Value Operations"],
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Error"
+          }
+        }
+      }
+    },
+    "/del/{key}": {
+      "delete": {
+        "summary": "Delete a key from Redis",
+        "tags": ["Key Value Operations"],
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted successfully"
+          },
+          "400": {
+            "description": "Error"
+          }
+        }
+      }
+    },
+    "/get_all_keys": {
+      "get": {
+        "summary": "Get all key-value pairs from Redis",
+        "tags": ["Batch Operations"],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "Error"
+          }
+        }
+      }
+    },
+    "/del_all_keys": {
+      "delete": {
+        "summary": "Delete all key-value pairs from Redis",
+        "tags": ["Batch Operations"],
+        "responses": {
+          "200": {
+            "description": "Deleted successfully"
+          },
+          "400": {
+            "description": "Error"
+          }
+        }
+      }
+    }
+  }
+}
